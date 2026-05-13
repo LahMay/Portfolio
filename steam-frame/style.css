@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+body{
+	font-family: 'Roboto', serif;
+	background-color: lightcyan;
+	margin: 0;
+}
+
+/* Website Links except the nav */
+a:link{
+	color: lightblue;
+}
+
+a:visited{
+	color: lightblue;
+}
+
+a:hover{
+	color: darkblue;
+}
+
+a:active{
+	color: darkblue;
+}
+
+header{
+	text-align: center;
+	background-color: lightblue;
+}
+
+header img{
+	max-height: 160px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+nav{
+	background-color: darkcyan;
+	font-size: 25px;
+	border-top: 1.5px solid black;
+	border-bottom: 1.5px solid black;
+}
+
+/* Navigation */
+nav ul{
+	list-style-type: none;
+	text-align: center;
+	margin: 8px 0;
+	padding: 0;
+}
+
+nav li{
+	display: inline;
+	padding: 5px;
+}
+
+nav a{
+	text-decoration: none;
+}
+
+nav a:link{
+	color: white;
+}
+
+nav a:visited{
+	color: white;
+}
+
+nav a:hover{
+	color: red;
+}
+
+nav a:active{
+	color: red;
+}
+
+/* Main*/
+main{
+	max-width: 1000px;
+	margin: 20px auto;
+	padding: 10px;
+}
+
+/* Footer */
+footer{
+	background-color: darkcyan;
+	color: lightblue;
+	border-top: purple 3px solid;
+	text-align: center;
+}
+
+footer .container-fluid{
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+
+footer .fa{
+	font-size: 4em;
+}
+
+.footer-bottom{
+	background-color: darkslateblue;
+}
+
+h1, h2, h3{
+	font-family: 'Montserrat', serif;
+}
+
+.home-hero{
+	background-image: url(images/steam-frame.png);
+	background-size: cover;
+	background-position: 50% 65%;
+	height: 350px;
+}
+
+.home-hero h1{
+	font-family: 'Caveat', cursive;
+	font-size: calc(18vw 0.5ren);
+	color: white;
+	font-size: 90px;
+	text-align: center;
+	padding: 100px 0;
+	margin: 0;
+}
+
+.image img{
+	width: 30%;
+	height: 30%;
+	margin-bottom: 10px;
+	margin-right: 15px;
+	float: left;
+}
+
+.images img{
+	height: 100px;
+	width: 100px;
+	margin-bottom: 10px;
+}
+
+.title h1{
+	color:blue;
+	border-bottom: 5px solid darkslateblue;
+}
+
+
+/* JavaScript Game changes for mobile */
+.mobile{
+	display:none;
+}
+
+/*CSS without a media query--applies to all sizes unless overridden*/
+h1{
+	font-size: 4em;
+}
+
+/* CSS Adjustments for Tablets */
+@media only screen and (max-width: 1024px) {
+	h1{
+		font-size: 1.8em;
+	}
+
+	img{
+		display: block;
+		margin: 0 auto;
+	}
+
+	var canvasWidth = 640;
+	var canvasHeight = 360;
+}
+
+/* CSS Adjustments for Smartphones */
+@media only screen and (max-width: 768px) {
+	h1{
+		font-size: 1.5em;
+	}
+
+	img{
+		display: block;
+		margin: 0 auto;
+	}
+
+	canvasWidth = 300;
+	canvasHeight= 300;
+
+	.desktop{
+		display:none;
+	}
+	
+	.mobile{
+		display: block;
+		touch-action: manipulation;
+	}
+}
