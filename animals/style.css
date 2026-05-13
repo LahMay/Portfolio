@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet');
+
+body{
+	font-family: 'Roboto', serif;
+	margin: 0;
+	background-color: burlywood;
+}
+
+/* Website Links except the nav */
+a:link{
+	color: forestgreen;
+}
+
+a:visited{
+	color: blue;
+}
+
+a:hover{
+	color: yellow;
+}
+
+a:active{
+	color: red;
+}
+
+header{
+	text-align: center;
+	background-color: saddlebrown;
+}
+
+header .fa{
+	font-size: 10em;
+	color: firebrick;
+}
+
+nav{
+	background-color: sandybrown;
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
+	padding: 5px;
+}
+
+/* Navigation */
+nav ul{
+	list-style-type: none;
+	text-align: center;
+	margin: 8px 0;
+	padding: 0;
+}
+
+nav li{
+	display: inline;
+	padding: 5px;
+}
+
+nav a{
+	text-decoration: none;
+}
+
+nav a:link{
+	color: blue;
+}
+
+nav a:visited{
+	color: blue;
+}
+
+nav a:hover{
+	color: white;
+}
+
+nav a:active{
+	color: darkred;
+}
+
+/* Main*/
+main{
+	max-width: 1200px;
+	margin: 20px auto;
+	padding: 10px;
+}
+
+/* Footer */
+footer{
+	border-top: black 3px solid;
+}
+
+footer h2{
+	margin-top: 10px;
+}
+
+footer ul{
+	list-style-type: none;
+}
+
+footer .fa{
+	font-size: 1em;
+}
+
+footer .col-sm-6{
+	background-color: orange;
+}
+
+footer .col-sm-12{
+	text-align: center;
+	background-color: darkorange;
+}
+
+img{
+	border: 10px solid black;
+	background-color: black;
+}
+
+h1, h2, h3{
+	font-family: 'Montserrat', serif;
+}
+
+.fa{
+	font-size: 10em;
+	color: firebrick;
+}
+
+.col-sm-10 p{
+	display: block;
+	border: 2px solid black;
+	box-shadow: 10px 10px 10px;
+	padding: 10px;
+	margin-top: 4%;
+	margin-right: 10%;
+}
+
+.gallery .preview{
+    width: 100%;
+    height: auto;
+}
+
+.gallery .gallery-thumbnails img {
+    width: 100px;
+    height: 75px;
+    margin: 3px 10px 10px 0;
+}
+
+.gallery .gallery-thumbnails img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.gallery .preview img#preview {
+    padding: 1px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto !important;
+    display: block !important;
+}
+
+/*CSS without a media query--applies to all sizes unless overridden*/
+h1{
+	font-size: 4em;
+}
+
+/* CSS Adjustments for Tablets */
+@media only screen and (max-width: 1024px) {
+	h1{
+		font-size: 1.8em;
+	}
+}
+
+/* CSS Adjustments for Smartphones */
+@media only screen and (max-width: 768px) {
+	h1{
+		font-size: 1.5em;
+	}
+}
