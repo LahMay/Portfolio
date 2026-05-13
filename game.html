@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width", initial-scale=1, minimum-scale=1/>
+	<meta name="description" content="This is class made game.">
+	<title>My Games and Ideas</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+</head>
+<body onload="startGame()">
+	<header>
+		<img src="images/logo.png" width="300" height="150" class="img-fluid logo" alt="a owl logo with the wording lah may paw">
+	</header>
+
+	<nav>
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<meta name="description" content="Home page of the website">
+			<li><a href="resume.html">Resume</a></li>
+			<meta name="description" content="The resume of the College Student Lah May and his personal works in weebly.">
+			<li><a href="portfolio.html">Porjects</a></li>
+			<meta name="description" content="Portfolio page with work examples">
+			<li><a href="game.html">Game</a></li>
+			<meta name="description" content="Games created by the College Student Lah May.">
+		</ul>
+	</nav>
+
+	<main>
+		<h1 class="fany-1">JavaScript Floating Balloon Game</h1>
+		<p>I mage this game while completing the <a href="https://www.w3schools.com/graphics/game_intro.asp">W3 Schools JavaScript tutorial.</a> Then I enhanced the game by increasing mobility, adding CSS, and a background image to the game.</p>
+
+		<div id="game">
+			<!--There are two versions of controls...one for desktop that uses a mouse and one for mobile devices The desktop has the desktop class and the mobile has the mobile class-->
+			<div class="game-controls desktop">
+				<button class="myButton" onmousedown="accelerate(-0.1)" onmouseup="accelerate(0.03)">WIND UPLIFT</button>
+				<a href="" ><button class="myButton">PLAY AGAIN</button></a>
+			</div>
+
+			<div class="game-controls mobile">
+				<button class="myButton" ontouchstart="accelerate(-0.1)" ontouchend="accelerate(0.03)">WIND UPLIFT</button>
+				<a href="" ><button class="myButton">PLAY AGAIN</button></a>
+			</div>
+		</div>
+
+		<script>
+			var myGamePiece;
+			var myObstacles = [];
+			var myScore;
+
+			function startGame() {
+				myGamePiece = new component(20, 30, "cloud.jpg", 30, 240, "image");
+				myGamePiece.gravity = 0.05;
+				myScore = new component("30px", "Consoles", "black", 420, 40, "text");
+				myGameArea.start();
+			}
+
+			var myGameArea = {
+				canvas : document.createElement("canvas"),
+				start : function() {
+					this.canvas.width = 640;
+					this.canvas.height = 360;
+					this.context = this.canvas.getContext("2d");
+					var myGame = document.getElementById("game");
+					myGame.insertBefore(this.canvas, myGame.childNodes[0]);        
+					this.frameNo = 0;
+					this.interval = setInterval(updateGameArea, 8);
+				},
+				clear : function() {
+					this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+				}
+			}
+
+			function component(width, height, color, x, y, type) {
+				this.type = type;
+				if (type == "image") {
+					this.image = new Image();
+					this.image.src = "images/ballon.png";
+				}
+				this.score = 0;
+				this.width = width;
+				this.height = height;
+				this.speedX = 0;
+				this.speedY = 0;    
+				this.x = x;
+				this.y = y;
+				this.gravity = 0;
+				this.gravitySpeed = 0;
+				this.update = function() {
+					ctx = myGameArea.context;
+					if (this.type == "text") {
+						ctx.font = this.width + " " + this.height;
+						ctx.fillStyle = color;
+						ctx.fillText(this.text, this.x, this.y);
+					} else {
+						ctx.fillStyle = color;
+						ctx.fillRect(this.x, this.y, this.width, this.height);
+					}
+					if (type == "image") {
+							ctx.drawImage(this.image,
+							this.x,
+							this.y,
+							this.width, this.height);
+						} else {
+							ctx.fillStyle = color;
+							ctx.fillRect(this.x, this.y, this.width, this.height);
+						}
+				}
+				this.newPos = function() {
+					this.gravitySpeed += this.gravity;
+					this.x += this.speedX;
+					this.y += this.speedY + this.gravitySpeed;
+					this.hitBottom();
+				}
+				this.hitBottom = function() {
+				  var rockbottom = myGameArea.canvas.height - this.height;
+				  if (this.y > rockbottom) {
+				      this.y = rockbottom;
+				      this.gravitySpeed = 0;
+				  }
+				}
+				this.crashWith = function(otherobj) {
+					var myleft = this.x;
+					var myright = this.x + (this.width);
+					var mytop = this.y;
+					var mybottom = this.y + (this.height);
+					var otherleft = otherobj.x;
+					var otherright = otherobj.x + (otherobj.width);
+					var othertop = otherobj.y;
+					var otherbottom = otherobj.y + (otherobj.height);
+					var crash = true;
+					if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+						crash = false;
+					}
+					return crash;
+				}
+			}
+
+			function updateGameArea() {
+				var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+				for (i = 0; i < myObstacles.length; i += 1) {
+					if (myGamePiece.crashWith(myObstacles[i])) {
+						return;
+					}
+				}
+				myGameArea.clear();
+				myGameArea.frameNo += 1;
+				if (myGameArea.frameNo == 1 || everyinterval(150)) {
+					x = myGameArea.canvas.width;
+					minHeight = 20;
+					maxHeight = 200;
+					height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+					minGap = 150;
+					maxGap = 200;
+					gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+					myObstacles.push(new component(20, height, "lightblue", x, 0));
+					myObstacles.push(new component(20, x - height - gap, "lightblue", x, height + gap));
+				}
+				for (i = 0; i < myObstacles.length; i += 1) {
+					myObstacles[i].x += -1;
+					myObstacles[i].update();
+				}
+				myScore.text="SCORE: " + myGameArea.frameNo;
+				myScore.update();
+				myGamePiece.newPos();
+				myGamePiece.update();
+			}
+
+			function everyinterval(n) {
+				if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+				return false;
+			}
+
+			function accelerate(n) {
+				myGamePiece.gravity = n;
+			}
+		</script>
+	</main>	
+	<footer>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>Let's Connect!</h2>
+				</div>
+
+				<div class="col-sm-3">
+					<i class="fa fa-youtube-play" aria-hidden="true"></i>
+
+					<h3>Subscribe Me On YouTube</h3>
+				</div>
+
+				<div class="col-sm-3">
+					<i class="fa fa-facebook-official" aria-hidden="true"></i>
+					<h3>Follow Me On Facebook</h3>
+				</div>
+
+				<div class="col-sm-3">
+					<i class="fa fa-mobile" aria-hidden="true"></i>
+					<h3>My Work Number</h3>
+				</div>
+				
+				<div class="col-sm-3">
+					<i class="fa fa-envelope-o" aria-hidden="true"></i>
+					<h3>My Work Email</h3>
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<small>&copy; Lah May 2024 Portfolio Website. All Rights reserved.</small>
+		</div>
+	</footer>
+	<!--jQuery, Popper, and Bootstrap Javascript files-->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>	
+</html>
